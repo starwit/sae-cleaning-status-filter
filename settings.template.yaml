@@ -1,8 +1,35 @@
 log_level: INFO
+
+mirror_detection:
+  y_up_threshold: 0.4                           # y-coordinate in normalized image space (0.0-1.0) above which mirror up position is assumed (top is 0, bottom is 1)
+  y_down_threshold: 0.6                         # y-coordinate in normalized image space (0.0-1.0) below which mirror down position is assumed (top is 0, bottom is 1)
+  required_stable_readings: 5                   # How long the mirror position needs to be constant until a new status is set
+  interval_s: 1.0                               # The minimum interval at which inference is executed
+  model:
+    weights_path: /path/to/model/weights.pt     # Path to weights for mirror detection (needs to have a `mirror` class)
+    device: cpu
+    confidence_threshold: 0.25
+    iou_threshold: 0.45
+    fp16: false
+    nms_agnostic: true
+    inference_size: [640, 640]
+
+no_cleaning_areas: []                           # list of Geojson `Polygon` where message will never be forwarded (i.e. `not cleaning`` is assumed)
+# - type: Polygon
+#   coordinates: [[                             # [lon, lat] format. The last point must equal the first!
+#       [10.01, 50.01],
+#       [10.02, 50.02],
+#       [10.02, 50.03],
+#       [10.03, 50.02],
+#       [10.01, 50.01]
+#     ]]
+
 redis:
   host: redis
   port: 6379
   stream_id: stream1
-  input_stream_prefix: objecttracker
-  output_stream_prefix: mystage
+  input_stream_prefix: videosource
+  output_stream_prefix: cleaningstatusfilter
+  detection_output_stream_prefix: cleaningstatusfilterdetection
+
 prometheus_port: 8000
