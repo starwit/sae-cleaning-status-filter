@@ -1,0 +1,13 @@
+[Unit]
+Description=Cleaning Status Filter
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/cleaningstatusfilter
+ExecStart=/usr/local/bin/cleaningstatusfilter
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

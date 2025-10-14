@@ -1,12 +1,16 @@
-.PHONY: install build-deb clean
+.PHONY: install set-version download-model build-deb clean
 
-export PACKAGE_NAME=mystage
+export PACKAGE_NAME=cleaningstatusfilter
+RELEASEMSG = ${RELEASE_MSG}
+
+EMAIL      := foss@starwit.de
+NAME       := Build Bot
 
 install:
 	poetry install
 
-check-settings:
-	./check_settings.sh
+settings.yaml:
+	cp settings.template.yaml settings.yaml
 
 test: install
 	poetry run pytest
@@ -14,9 +18,21 @@ test: install
 set-version:
 	$(eval VERSION := $(shell poetry version -s))
 	@echo $(VERSION)
-	sed -i -e "s/###RELEASE_VERSION###/$(VERSION)/" debian/changelog
+	dch --newversion "$(VERSION)" \
+	    --maintmaint \
+	    --controlmaint \
+	    --distribution unstable \
+	    --changelog debian/changelog \
+	    --vendor "" \
+	    --force-distribution \
+	    "$(RELEASEMSG)" \
+		-- \
+	    --author "$(NAME) <$(EMAIL)>"
 
-build-deb: check-settings set-version
+download-model: 
+	$(shell ./model_downloader.sh)
+
+build-deb: settings.yaml set-version download-model
 
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
 

@@ -58,16 +58,22 @@ jobs:
           if [ ! -z "$modifications" ]
           then
             echo "modifications found: $modifications"
-            git commit -m "modified project version" ./pyproject.toml
+            git commit -m "modified project version" ./pyproject.toml ./debian/changelog
             git push
           fi 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: build apt package
+        run: |
+            echo "Build APT package"
+            bash -c "poetry self add poetry-plugin-export; make build-deb"
+            echo "Finish building APT package"
+
       - name: Create github release
         run: | 
           APP_VERSION=$(cat pyproject.toml | grep "version" | head -1 | cut -d'=' -f2 | xargs echo -n) 
-          gh release create $APP_VERSION -F README.md --title "${APP_VERSION}" --target $(git branch --show-current)
+          gh release create $APP_VERSION -F README.md --title "${APP_VERSION}" --target $(git branch --show-current) ./target/*deb ./target/*.dsc
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

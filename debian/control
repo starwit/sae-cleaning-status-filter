@@ -1,0 +1,16 @@
+Source: cleaningstatusfilter
+Section: python
+Priority: optional
+Maintainer: Florian Stanek <foss@starwit.de>
+Build-Depends: debhelper (>= 11), dh-python, python3-all (>= 3.10), python3-setuptools, python3-pip
+Standards-Version: 4.1.3
+Homepage: https://starwit.de
+
+Package: cleaningstatusfilter
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-all (>= 3.10), python3-pip,
+        python3-venv
+XB-Python-Version: ${python:Versions}
+Description: SAE Cleaning Status Filter
+ When running on a trash collecting vehicle, this component detects if
+ cleaning equipment is deployed. Only then waste needs to be detected.
