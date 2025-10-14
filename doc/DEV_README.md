@@ -21,5 +21,6 @@ make build-deb
 APT package can then be found in folder _target_. You can test installation using Docker, however SystemD (probably) won't work.
 ```bash
 docker run -it --rm -v ./target:/app  jrei/systemd-ubuntu:latest bash
-apt update && apt install -y /app/cleaningstatusfilter_0.1.0_all.deb
+apt update 
+apt install -y /app/cleaningstatusfilter_0.1.0_all.deb
 ```

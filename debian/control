@@ -9,7 +9,7 @@ Homepage: https://starwit.de
 Package: cleaningstatusfilter
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}, python3-all (>= 3.10), python3-pip,
-        python3-venv
+        python3-venv, git, libturbojpeg0, python3-opencv
 XB-Python-Version: ${python:Versions}
 Description: SAE Cleaning Status Filter
  When running on a trash collecting vehicle, this component detects if
