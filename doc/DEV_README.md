@@ -10,3 +10,9 @@ Once build you can run Docker image locally like so:
 docker run -it --rm -v ./settings.yaml:/code/ starwitorg/starwitorg/sae-cleaning-status-filter:0.1.0
 ```
 Please note, that you should provide a settings.yaml that configures application to your needs. See [template](settings.template.yaml) for how to do that.
+
+## APT Package
+Run the following command to create an APT package:
+```bash
+make build-deb
+```
