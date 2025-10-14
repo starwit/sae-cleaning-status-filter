@@ -14,5 +14,12 @@ Please note, that you should provide a settings.yaml that configures application
 ## APT Package
 Run the following command to create an APT package:
 ```bash
+poetry self add poetry-plugin-export
 make build-deb
+```
+
+APT package can then be found in folder _target_. You can test installation using Docker, however SystemD (probably) won't work.
+```bash
+docker run -it --rm -v ./target:/app  jrei/systemd-ubuntu:latest bash
+apt update && apt install -y /app/cleaningstatusfilter_0.1.0_all.deb
 ```
