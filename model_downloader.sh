@@ -1,11 +1,11 @@
 #!/bin/bash
 # Downloads latest trained model
 
-REPO="starwit/cleaning-classifier"
-FILE="best.pt.gz"      # the name of your release asset file, e.g. build.tar.gz
+REPO="starwit/mirror-detection"
+FILE="mirror-detection.pt"      # the name of your release asset file, e.g. build.tar.gz
 VERSION=latest         # tag name or the word "latest"
 GITHUB="https://api.github.com"
-OUTPUT="model.pt.gz"
+OUTPUT="mirror-detection.pt"
 
 function gh_curl() {
   curl -H "Authorization: token $TOKEN" \
