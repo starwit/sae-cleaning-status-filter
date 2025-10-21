@@ -5,7 +5,7 @@ REPO="starwit/mirror-detection"
 FILE="mirror-detection.pt"      # the name of your release asset file, e.g. build.tar.gz
 VERSION=latest         # tag name or the word "latest"
 GITHUB="https://api.github.com"
-OUTPUT="mirror-detection.pt"
+OUTPUT="model.pt"
 
 function gh_curl() {
   curl -H "Authorization: token $TOKEN" \
