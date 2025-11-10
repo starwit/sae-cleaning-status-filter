@@ -9,18 +9,18 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pydantic = "^2.11.7"
+pydantic = "^2.12.4"
 visionapi = { git = "https://github.com/starwit/vision-api.git", subdirectory = "python/visionapi", tag = "3.5.3" }
 visionlib = { git = "https://github.com/starwit/vision-lib.git", subdirectory = "python", tag = "0.14.0" }
-pydantic-settings = "2.10.1"
-prometheus-client = "0.22.1"
-ultralytics = "^8.3.207"
+pydantic-settings = "2.11.0"
+prometheus-client = "0.23.1"
+ultralytics = "^8.3.227"
 openvino = "^2025.3.0"
 geojson-pydantic = "^2.1.0"
 shapely = "^2.1.2"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.4.2"
+pytest = "9.0.0"
 
 [build-system]
 requires = ["poetry-core"]
