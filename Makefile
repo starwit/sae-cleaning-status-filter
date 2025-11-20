@@ -5,6 +5,7 @@ RELEASEMSG = ${RELEASE_MSG}
 
 EMAIL      := foss@starwit.de
 NAME       := Build Bot
+SHELL	   := /bin/bash
 
 install:
 	poetry install
@@ -30,7 +31,7 @@ set-version:
 	    --author "$(NAME) <$(EMAIL)>"
 
 download-model: 
-	$(shell ./model_downloader.sh)
+	./model_downloader.sh
 
 build-deb: settings.yaml set-version download-model
 

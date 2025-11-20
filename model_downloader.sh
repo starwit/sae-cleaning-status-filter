@@ -1,6 +1,11 @@
 #!/bin/bash
 # Downloads latest trained model
 
+if [[ -z "$TOKEN" ]]; then
+  echo "ERROR: Please set TOKEN environment variable (GitHub personal access token with read access to model repo)"
+  exit 1
+fi
+
 REPO="starwit/mirror-detection"
 FILE="mirror-detection.pt"      # the name of your release asset file, e.g. build.tar.gz
 VERSION=latest         # tag name or the word "latest"
@@ -13,7 +18,7 @@ function gh_curl() {
        $@
 }
 
-if [ "$VERSION" = "latest" ]; then
+if [[ "$VERSION" == "latest" ]]; then
   # Github should return the latest release first.
   parser=".[0].assets | map(select(.name == \"$FILE\"))[0].id"
 else
