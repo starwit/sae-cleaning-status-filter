@@ -28,7 +28,7 @@ def test_smoke(mock_redis_publisher, mock_redis_consumer, mock_config, mock_time
         )
     )
 
-    # Make sure that every input message is visually checked (see the interval_s config parameter above)
+    # Make sure that every input message is visually checked by increasing the time by more than interval_s (see above) on every iteration
     def iter_time():
         current_time = 2000
         while True:
@@ -39,6 +39,7 @@ def test_smoke(mock_redis_publisher, mock_redis_consumer, mock_config, mock_time
 
     publisher_mock = mock_redis_publisher.return_value 
     
+    # Mock three messages for the component to read from redis
     mock_redis_consumer.return_value.return_value.__iter__.return_value = iter([
         ('videosource:stream1', _make_sae_msg_bytes(1)),
         ('videosource:stream1', _make_sae_msg_bytes(2)),
@@ -48,6 +49,7 @@ def test_smoke(mock_redis_publisher, mock_redis_consumer, mock_config, mock_time
     model = mock_model.return_value
     model.names = {0: 'mirror', 1: 'non-mirror'}
 
+    # Mock mirror detection results
     model.side_effect = [
         [_make_detection(0.9, 0)],
         [_make_detection(0.9, 0)],
@@ -56,7 +58,7 @@ def test_smoke(mock_redis_publisher, mock_redis_consumer, mock_config, mock_time
 
     run_stage()
 
-    # Assert that one SAE message was forwarded and all mirror detections were output into the separate stream
+    # Assert that one SAE message was forwarded and all mirror detections were output into the separate mirror detection stream
     assert [call.args[0] for call in publisher_mock.call_args_list] == [
         'mirror_det_output:stream1',
         'mirror_det_output:stream1',
