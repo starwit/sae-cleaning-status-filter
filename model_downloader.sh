@@ -35,4 +35,3 @@ wget -q --auth-no-challenge --header='Accept:application/octet-stream' \
   https://$TOKEN:@api.github.com/repos/$REPO/releases/assets/$asset_id \
   -O $OUTPUT
 
-gunzip -f $OUTPUT
