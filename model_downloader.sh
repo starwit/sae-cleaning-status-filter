@@ -25,6 +25,9 @@ else
   parser=". | map(select(.tag_name == \"$VERSION\"))[0].assets | map(select(.name == \"$FILE\"))[0].id"
 fi;
 
+echo "Get URL for latest release from repo"
+gh_curl -s $GITHUB/repos/$REPO/releases
+
 asset_id=`gh_curl -s $GITHUB/repos/$REPO/releases | jq "$parser"`
 if [ "$asset_id" = "null" ]; then
   echo "ERROR: version not found $VERSION"
