@@ -41,12 +41,12 @@ def run_stage():
 
     cleaning_status_filter = CleaningStatusFilter(CONFIG)
 
-    consume = RedisConsumer(CONFIG.redis.host, CONFIG.redis.port, 
+    consumer_ctx = RedisConsumer(CONFIG.redis.host, CONFIG.redis.port, 
                             stream_keys=[f'{CONFIG.redis.input_stream_prefix}:{CONFIG.redis.stream_id}'])
-    publish = RedisPublisher(CONFIG.redis.host, CONFIG.redis.port)
+    publisher_ctx = RedisPublisher(CONFIG.redis.host, CONFIG.redis.port)
     
-    with consume, publish:
-        for stream_key, proto_data in consume():
+    with consumer_ctx as iter_messages, publisher_ctx as publish:
+        for stream_key, proto_data in iter_messages():
             if stop_event.is_set():
                 break
 
