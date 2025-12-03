@@ -1,6 +1,5 @@
 settings.yaml /etc/cleaningstatusfilter
 main.py /opt/cleaningstatusfilter
-model.pt /opt/cleaningstatusfilter
 
 requirements.txt /opt/cleaningstatusfilter
 cleaningstatusfilter /opt/cleaningstatusfilter

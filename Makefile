@@ -1,4 +1,4 @@
-.PHONY: install set-version download-model build-deb clean
+.PHONY: install set-version build-deb clean
 
 export PACKAGE_NAME=cleaningstatusfilter
 RELEASEMSG = ${RELEASE_MSG}
@@ -30,10 +30,7 @@ set-version:
 		-- \
 	    --author "$(NAME) <$(EMAIL)>"
 
-download-model: 
-	./model_downloader.sh
-
-build-deb: settings.yaml set-version download-model
+build-deb: settings.yaml set-version
 
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
 
