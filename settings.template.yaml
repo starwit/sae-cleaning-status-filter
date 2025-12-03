@@ -4,7 +4,7 @@ mirror_detection:
   y_up_threshold: 0.4                           # y-coordinate in normalized image space (0.0-1.0) above which mirror up position is assumed (top is 0, bottom is 1)
   y_down_threshold: 0.6                         # y-coordinate in normalized image space (0.0-1.0) below which mirror down position is assumed (top is 0, bottom is 1)
   required_stable_readings: 5                   # How long the mirror position needs to be constant until a new status is set
-  interval_s: 1.0                               # The minimum interval at which inference is executed
+  interval_s: 1.0                               # The shortest interval at which inference is executed (cached values will be used inbetween)
   model:
     weights_path: /opt/cleaningstatusfilter/model.pt     # Path to weights for mirror detection (needs to have a `mirror` class)
     device: cpu
