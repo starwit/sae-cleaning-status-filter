@@ -1,20 +1,19 @@
 import logging
 from typing import List, NamedTuple, Optional
 
-from prometheus_client import Counter, Histogram, Summary
+from prometheus_client import Histogram, Summary
 from shapely import Point, Polygon
 from shapely.geometry import shape
 from visionapi.sae_pb2 import SaeMessage
 
 from .config import CleaningStatusFilterConfig
-from .mirrordetection import MirrorDetector, MirrorStatus, DetectionResult
+from .mirrordetection import MirrorDetector, MirrorStatus
 
 logging.basicConfig(format='%(asctime)s %(name)-15s %(levelname)-8s %(processName)-10s %(message)s')
 logger = logging.getLogger(__name__)
 
 GET_DURATION = Histogram('cleaning_status_filter_get_duration', 'The time it takes to deserialize the proto until returning the tranformed result as a serialized proto',
                          buckets=(0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1, 0.15, 0.2, 0.25))
-OBJECT_COUNTER = Counter('cleaning_status_filter_object_counter', 'How many detections have been transformed')
 PROTO_SERIALIZATION_DURATION = Summary('cleaning_status_filter_proto_serialization_duration', 'The time it takes to create a serialized output proto')
 PROTO_DESERIALIZATION_DURATION = Summary('cleaning_status_filter_proto_deserialization_duration', 'The time it takes to deserialize an input proto')
 

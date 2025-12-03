@@ -3,17 +3,18 @@ import time
 from enum import Enum
 from typing import List, NamedTuple, Optional
 
-from numpy import uint8
-from numpy.typing import NDArray
+from google.protobuf.json_format import MessageToJson
+from prometheus_client import Gauge
 from visionapi.common_pb2 import MessageType
 from visionapi.sae_pb2 import Detection, SaeMessage
 from visionlib.pipeline.tools import get_raw_frame_data
-from google.protobuf.json_format import MessageToJson
 
 from .config import LogLevel, MirrorDetectionConfig
 from .model import Model
 
 logger = logging.getLogger(__name__)
+
+MIRROR_POSITION = Gauge('cleaning_status_filter_mirror_y_pos', 'The relative position of the detected mirror in the vertical image dimension')
 
 
 class MirrorStatus(str, Enum):
@@ -99,6 +100,7 @@ class MirrorDetector:
         # Keep in mind that y counts from the top of the image (i.e. image top row is y=0)
         mirror_center_y = (det.bounding_box.min_y + det.bounding_box.max_y) / 2
         logger.debug(f'mirror_center_y: {mirror_center_y}')
+        MIRROR_POSITION.set(mirror_center_y)
         if mirror_center_y > self._config.y_down_threshold:
             return MirrorStatus.DOWN
         
