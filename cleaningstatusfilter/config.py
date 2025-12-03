@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Self
+from typing import Annotated, List, Self
 
 from geojson_pydantic import Polygon
 from pydantic import BaseModel, Field, model_validator
@@ -28,10 +28,10 @@ class RedisConfig(BaseModel):
 
 
 class MirrorDetectionConfig(BaseModel):
-    y_up_threshold: float
-    y_down_threshold: float
-    required_stable_readings: int = 5
-    interval_s: float = 1
+    y_up_threshold: Annotated[float, Field(ge=0, le=1)]
+    y_down_threshold: Annotated[float, Field(ge=0, le=1)]
+    required_stable_readings: Annotated[int, Field(ge=1)] = 5
+    interval_s: Annotated[float, Field(gt=0)] = 1
     model: ModelConfig
 
     @model_validator(mode='after')

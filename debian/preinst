@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p /etc/cleaningstatusfilter
+mkdir -p /opt/cleaningstatusfilter

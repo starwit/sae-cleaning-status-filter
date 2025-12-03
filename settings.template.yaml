@@ -6,7 +6,7 @@ mirror_detection:
   required_stable_readings: 5                   # How long the mirror position needs to be constant until a new status is set
   interval_s: 1.0                               # The minimum interval at which inference is executed
   model:
-    weights_path: /path/to/model/weights.pt     # Path to weights for mirror detection (needs to have a `mirror` class)
+    weights_path: /opt/cleaningstatusfilter/model.pt     # Path to weights for mirror detection (needs to have a `mirror` class)
     device: cpu
     confidence_threshold: 0.25
     iou_threshold: 0.45
