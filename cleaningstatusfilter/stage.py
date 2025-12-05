@@ -3,8 +3,8 @@ import signal
 import threading
 
 from prometheus_client import Counter, Histogram, start_http_server
-from visionlib.pipeline.consumer import RedisConsumer
-from visionlib.pipeline.publisher import RedisPublisher
+from visionlib.pipeline import ValkeyConsumer
+from visionlib.pipeline import ValkeyPublisher
 
 from .config import CleaningStatusFilterConfig
 from .cleaningstatusfilter import CleaningStatusFilter
@@ -41,9 +41,9 @@ def run_stage():
 
     cleaning_status_filter = CleaningStatusFilter(CONFIG)
 
-    consumer_ctx = RedisConsumer(CONFIG.redis.host, CONFIG.redis.port, 
+    consumer_ctx = ValkeyConsumer(CONFIG.redis.host, CONFIG.redis.port, 
                             stream_keys=[f'{CONFIG.redis.input_stream_prefix}:{CONFIG.redis.stream_id}'])
-    publisher_ctx = RedisPublisher(CONFIG.redis.host, CONFIG.redis.port)
+    publisher_ctx = ValkeyPublisher(CONFIG.redis.host, CONFIG.redis.port)
     
     with consumer_ctx as iter_messages, publisher_ctx as publish:
         for stream_key, proto_data in iter_messages():

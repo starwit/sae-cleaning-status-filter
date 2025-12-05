@@ -2004,24 +2004,6 @@ files = [
 ]
 
 [[package]]
-name = "redis"
-version = "7.1.0"
-description = "Python client for Redis database and key-value store"
-optional = false
-python-versions = ">=3.10"
-groups = ["main"]
-files = [
-    {file = "redis-7.1.0-py3-none-any.whl", hash = "sha256:23c52b208f92b56103e17c5d06bdc1a6c2c0b3106583985a76a18f83b265de2b"},
-    {file = "redis-7.1.0.tar.gz", hash = "sha256:b1cc3cfa5a2cb9c2ab3ba700864fb0ad75617b41f01352ce5779dabf6d5f9c3c"},
-]
-
-[package.extras]
-circuit-breaker = ["pybreaker (>=1.4.0)"]
-hiredis = ["hiredis (>=3.2.0)"]
-jwt = ["pyjwt (>=2.9.0)"]
-ocsp = ["cryptography (>=36.0.1)", "pyopenssl (>=20.0.1)", "requests (>=2.31.0)"]
-
-[[package]]
 name = "requests"
 version = "2.32.5"
 description = "Python HTTP for Humans."
@@ -2477,6 +2459,22 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "valkey"
+version = "6.1.1"
+description = "Python client for Valkey forked from redis-py"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "valkey-6.1.1-py3-none-any.whl", hash = "sha256:e2691541c6e1503b53c714ad9a35551ac9b7c0bbac93865f063dbc859a46de92"},
+    {file = "valkey-6.1.1.tar.gz", hash = "sha256:5880792990c6c2b5eb604a5ed5f98f300880b6dd92d123819b66ed54bb259731"},
+]
+
+[package.extras]
+libvalkey = ["libvalkey (>=4.0.1)"]
+ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==23.2.1)", "requests (>=2.31.0)"]
+
+[[package]]
 name = "visionapi"
 version = "3.5.3"
 description = ""
@@ -2498,7 +2496,7 @@ subdirectory = "python/visionapi"
 
 [[package]]
 name = "visionlib"
-version = "0.14.2"
+version = "1.0.0"
 description = ""
 optional = false
 python-versions = "^3.10"
@@ -2513,16 +2511,16 @@ pydantic = ">=2.3.0"
 pydantic-settings = ">=2.0.3"
 pyturbojpeg = ">=1.7.2"
 pyyaml = ">=6.0.1"
-redis = ">=5.0.0"
+valkey = ">=6.0.0"
 
 [package.source]
 type = "git"
 url = "https://github.com/starwit/vision-lib.git"
-reference = "0.14.2"
-resolved_reference = "92d6480ebba579d0d3afb058edc53a9bf414ef49"
+reference = "1.0.0"
+resolved_reference = "14bc05bb8681b8398103553d7609a93493c3bc34"
 subdirectory = "python"
 
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.13"
-content-hash = "589437cae49509416d5344f7883ce569f4f6a409f663fa53df0feba258de51a7"
+content-hash = "3195d2e9b68a8d7aae0cfcaa73ecb8ac54b111718665e2d19435f62b3ae04a04"
