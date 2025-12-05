@@ -55,4 +55,6 @@ jobs:
         sbom: true
         provenance: mode=max
         push: true
+        cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
+        cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache
         tags: ${{ env.DOCKERHUB_ORG }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_VERSION }}-${{ github.run_number }}
