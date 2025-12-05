@@ -8,3 +8,4 @@ cache
 settings.yaml
 
 env.sh
+requirements.txt

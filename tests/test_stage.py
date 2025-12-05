@@ -31,12 +31,12 @@ def set_config():
 
 @pytest.fixture
 def publisher_mock():
-    with patch('cleaningstatusfilter.stage.RedisPublisher') as mock_publisher:
+    with patch('cleaningstatusfilter.stage.ValkeyPublisher') as mock_publisher:
         yield mock_publisher.return_value.__enter__.return_value
 
 @pytest.fixture
 def inject_consumer_messages():
-    with patch('cleaningstatusfilter.stage.RedisConsumer') as mock_consumer:
+    with patch('cleaningstatusfilter.stage.ValkeyConsumer') as mock_consumer:
         def _inject_messages(messages):
             mock_consumer.return_value.__enter__.return_value.return_value.__iter__.return_value = iter(messages)
         yield _inject_messages
