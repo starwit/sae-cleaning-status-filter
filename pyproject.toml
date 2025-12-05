@@ -12,13 +12,13 @@ poetry-plugin-export = ">=1.8"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-pydantic = "^2.11.7"
+pydantic = "2.12.5"
 visionapi = { git = "https://github.com/starwit/vision-api.git", subdirectory = "python/visionapi", tag = "3.5.3" }
 visionlib = { git = "https://github.com/starwit/vision-lib.git", subdirectory = "python", tag = "0.14.2" }
-pydantic-settings = "2.10.1"
-prometheus-client = "0.22.1"
-geojson-pydantic = "^2.1.0"
-shapely = "^2.1.2"
+pydantic-settings = "2.12.0"
+prometheus-client = "0.23.1"
+geojson-pydantic = "2.1.0"
+shapely = "2.1.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.4.2"
