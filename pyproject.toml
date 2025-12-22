@@ -21,10 +21,10 @@ geojson-pydantic = "2.1.0"
 shapely = "2.1.2"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.4.2"
+pytest = "9.0.2"
 # DO NOT CHANGE THE VERSIONS BELOW, they must match the versions in the docker base image (https://github.com/starwit/build-containers/tree/main/sae-cv-base)
-openvino = "2025.4.0"
-ultralytics = "8.3.191"
+openvino = "2025.4.1"
+ultralytics = "8.3.240"
 
 [build-system]
 requires = ["poetry-core"]
